@@ -1,0 +1,75 @@
+version: "3"
+
+services:
+    todobackend:
+        image: todobackend:0.0.1
+        build: 
+            context: ./todobackend
+            dockerfile: .
+        ports: 
+            - "5000:80"
+        networks: 
+            - backend
+            
+    db_app:
+        image: postgres
+        environment:
+            POSTGRES_USER: admin
+            POSTGRES_PASSWORD: app
+        volumes:
+            - postgresql_app:/var/lib/postgresql
+            - postgresql_data_app:/var/lib/postgresql/data
+        networks: 
+            - backend
+
+    jenkins:
+        image: jenkinsci/blueocean
+        ports: 
+            - '8080:8080'
+        networks: 
+            - sonarnet
+        volumes: 
+            - 'volume_jenkins:/var/jenkins_home'
+            - '//var/run/docker.sock:/var/run/docker.sock'
+
+    sonarqube:
+        image: sonarqube:community
+        depends_on:
+            - db
+        environment:
+            SONAR_JDBC_URL: jdbc:postgresql://db:5432/sonar
+            SONAR_JDBC_USERNAME: sonar
+            SONAR_JDBC_PASSWORD: sonar
+        volumes:
+            - sonarqube_data:/opt/sonarqube/data
+            - sonarqube_extensions:/opt/sonarqube/extensions
+            - sonarqube_logs:/opt/sonarqube/logs
+        ports:
+            - "9000:9000"
+        networks: 
+        - sonarnet
+    db:
+        image: postgres
+        environment:
+            POSTGRES_USER: sonar
+            POSTGRES_PASSWORD: sonar
+        volumes:
+            - postgresql:/var/lib/postgresql
+            - postgresql_data:/var/lib/postgresql/data
+        networks: 
+            - sonarnet
+
+volumes:
+    sonarqube_data:
+    sonarqube_extensions:
+    sonarqube_logs:
+    postgresql:
+    postgresql_data:
+    postgresql_app:
+    postgresql_data_app:
+    volume_jenkins:
+        driver: local
+
+networks: 
+    backend:
+    sonarnet:
