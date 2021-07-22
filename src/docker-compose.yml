@@ -22,16 +22,6 @@ services:
         networks: 
             - backend
 
-    jenkins:
-        image: jenkinsci/blueocean
-        ports: 
-            - '8080:8080'
-        networks: 
-            - sonarnet
-        volumes: 
-            - 'volume_jenkins:/var/jenkins_home'
-            - '//var/run/docker.sock:/var/run/docker.sock'
-
     sonarqube:
         image: sonarqube:community
         depends_on:
