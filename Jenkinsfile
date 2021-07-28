@@ -19,11 +19,6 @@ pipeline{
                 bat 'dotnet sonarscanner end /d:sonar.login="0c09bbe076dfe2f87d40fd4ccc5350818b99b9f0"'
             }
         }
-        stage("Quality gate") {
-            steps {
-                waitForQualityGate abortPipeline: true
-            }
-        }
         
     }
 }
