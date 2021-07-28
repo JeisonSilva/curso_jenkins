@@ -12,9 +12,7 @@ pipeline{
             }
         }
         stage("ANALISE SONARQUBE"){
-            environment{
-                SONAR_SCANNER_MSBUILD = tool 'Scanner_MSBuild_5'
-            }
+            def SONAR_SCANNER_MSBUILD = tool 'Scanner_MSBuild_5'
             steps{
                 withSonarQubeEnv('LOCAL'){
                     bat 'dotnet test ./src/todobackend.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --no-build'
