@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage("Compilando aplicação"){
             steps{
-                bat 'echo ola mundo'
+                bat 'dotnet build ./src/todobackend.sln'
             }
         }
     }
