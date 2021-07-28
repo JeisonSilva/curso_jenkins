@@ -1,11 +1,9 @@
 pipeline{
-    agent{
-        label "node"
-    }
+    agent any
     stages{
         stage("Compilando aplicação"){
             steps{
-                echo 'Teste execução'
+                bat 'echo ola mundo'
             }
         }
     }
