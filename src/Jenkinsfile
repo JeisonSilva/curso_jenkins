@@ -5,7 +5,7 @@ pipeline{
     stages{
         stage("Compilando aplicação"){
             steps{
-                bat 'dotnet build ./todobackend.sln'
+                echo 'Teste execução'
             }
         }
     }
