@@ -2,9 +2,9 @@
 <CoverageSession>
   <Summary numSequencePoints="11" visitedSequencePoints="11" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="5" minCyclomaticComplexity="5" visitedClasses="2" numClasses="2" visitedMethods="5" numMethods="5" />
   <Modules>
-    <Module hash="2FD62A0F-0E04-4C18-B4DD-7BCE9AB3A46E">
+    <Module hash="CEBD5AD0-07B0-44A1-BA28-89A2DC12DE23">
       <ModulePath>todobackend.CriacaoListaTarefas.dll</ModulePath>
-      <ModuleTime>2021-07-27T12:08:17</ModuleTime>
+      <ModuleTime>2021-07-28T12:00:52</ModuleTime>
       <ModuleName>todobackend.CriacaoListaTarefas</ModuleName>
       <Files>
         <File uid="1" fullPath="E:\Projetos\curso_jenkins\src\todobackend.CriacaoListaTarefas\Entities\Atividade.cs" />
