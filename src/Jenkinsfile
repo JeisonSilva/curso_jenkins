@@ -5,30 +5,8 @@ pipeline{
     stages{
         stage("Compilando aplicação"){
             steps{
-                bat dotnet build ./todobackend.sln
+                bat 'dotnet build ./todobackend.sln'
             }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
-            }
-        }
-    }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
         }
     }
 }
