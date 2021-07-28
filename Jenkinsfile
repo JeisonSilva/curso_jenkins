@@ -23,14 +23,6 @@ pipeline{
                 bat '${SONAR_SCANNER_MSBUILD}/SonarScanner.MSBuild.dll end /d:sonar.login="0c09bbe076dfe2f87d40fd4ccc5350818b99b9f0"'
             }
         }
-        stage("QUALITY GATE"){
-            steps{
-                timeout(time: 1, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-                
-            }
-        }
         
     }
 }
