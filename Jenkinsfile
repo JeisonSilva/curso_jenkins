@@ -13,13 +13,13 @@ pipeline{
         }
         stage("ANALISE SONARQUBE"){
             environment{
-                SONAR_SCANNER_MSBUILD = tool 'Scanner_MSBuild_5'
+                scannerHome = tool 'SONAR_SCANNER'
             }
             steps{
-                bat 'dotnet test ./src/todobackend.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --no-build'
-                bat "E:\\Programas\\sonar-scanner-msbuild-5.2.2.33595-net46\\SonarScanner.MSBuild.exe begin /k:TodoBackend /d:sonar.cs.opencover.reportsPaths=src/coverage.opencover.xml /d:sonar.coverage.exclusions=**Test*.cs /d:sonar.host.url=http://localhost:9000  /v:sonar.projectVersion=1.0.1 /d:sonar.login=0c09bbe076dfe2f87d40fd4ccc5350818b99b9f0"
-                bat 'dotnet build ./src/todobackend.sln'
-                bat 'E:\\Programas\\sonar-scanner-msbuild-5.2.2.33595-net46\\SonarScanner.MSBuild.exe end /d:sonar.login="0c09bbe076dfe2f87d40fd4ccc5350818b99b9f0"'
+                withSonarQubeEnv('SONAR_LOCAL'){
+                    bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=TodoBackend -Dsonar.cs.opencover.reportsPaths=src/coverage.opencover.xml -Dsonar.coverage.exclusions=**Test*.cs -Dsonar.host.url=http://localhost:9000  -Vsonar.projectVersion=1.0.1 -Dsonar.login=0c09bbe076dfe2f87d40fd4ccc5350818b99b9f0"
+                }
+                
             }
         }
         
