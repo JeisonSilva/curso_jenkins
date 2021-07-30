@@ -8,7 +8,7 @@ pipeline{
         }
         stage("TESTE BACKEND"){
             steps{
-                bat 'dotnet test ./src/todobackend.sln --no-build'
+                bat 'dotnet test ./src/todobackend.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --no-build'
             }
         }
         stage("ANALISE SONARQUBE"){
