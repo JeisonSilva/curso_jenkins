@@ -1,27 +1,20 @@
 version: "3"
 
 services:
-    todobackend:
-        image: todobackend:0.0.1
+    jenkins:
+        image: jsonsilva/jenkins
         build: 
-            context: ./todobackend
+            context: ./
             dockerfile: .
         ports: 
-            - "5000:80"
+            - "8080:8080"
+            - "50000:50000"
         networks: 
-            - backend
-            
-    db_app:
-        image: postgres
-        environment:
-            POSTGRES_USER: admin
-            POSTGRES_PASSWORD: app
-        volumes:
-            - postgresql_app:/var/lib/postgresql
-            - postgresql_data_app:/var/lib/postgresql/data
-        networks: 
-            - backend
-
+            - sonarnet
+        container_name: jenkins_dev
+        volumes: 
+            - volume_jenkins:/var/jenkins_home
+    
     sonarqube:
         image: sonarqube:community
         depends_on:
@@ -55,11 +48,8 @@ volumes:
     sonarqube_logs:
     postgresql:
     postgresql_data:
-    postgresql_app:
-    postgresql_data_app:
     volume_jenkins:
         driver: local
 
 networks: 
-    backend:
     sonarnet:
