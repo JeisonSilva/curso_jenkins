@@ -15,7 +15,12 @@ RUN apt-get update -qq && apt-get install -qqy docker-ce docker-ce-cli container
 
 RUN usermod -aG docker jenkins
 
-COPY ./dotnet-install.sh .
-RUN ./dotnet-install.sh
+RUN wget https://packages.microsoft.com/config/ubuntu/21.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+RUN rm packages-microsoft-prod.deb
+RUN apt-get update; \
+  apt-get install -y apt-transport-https && \
+  apt-get update && \
+  apt-get install -y dotnet-sdk-5.0
 
 ENTRYPOINT ["/bin/sh", "-c", "service docker start && /sbin/tini -- /usr/local/bin/jenkins.sh"]
