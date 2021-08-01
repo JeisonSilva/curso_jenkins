@@ -1,5 +1,9 @@
 pipeline{
     agent any
+    environment {
+        DOTNET_ROOT = "/opt/jenkins/tools/com.cloudbees.jenkins.plugins.customtools.CustomTool/dotnet-sdk-3.1/"
+        PATH = "/opt/jenkins/tools/com.cloudbees.jenkins.plugins.customtools.CustomTool/dotnet-sdk-3.1/:$PATH"
+    }
     stages{
         stage("COMPILACAO BACKEND"){
             steps{
