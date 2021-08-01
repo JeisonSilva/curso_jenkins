@@ -3,6 +3,7 @@ version: "3"
 services:
     jenkins:
         image: jsonsilva/jenkins
+        container_name: jenkins_dev
         build: 
             context: ./
             dockerfile: .
@@ -11,12 +12,12 @@ services:
             - "50000:50000"
         networks: 
             - sonarnet
-        container_name: jenkins_dev
         volumes: 
             - volume_jenkins:/var/jenkins_home
                 
     sonarqube:
         image: sonarqube:community
+        container_name: sonarqube_dev
         depends_on:
             - db
         environment:
@@ -30,7 +31,7 @@ services:
         ports:
             - "9000:9000"
         networks: 
-        - sonarnet
+            - sonarnet
     db:
         image: postgres
         environment:
